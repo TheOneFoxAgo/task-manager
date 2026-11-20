@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Менеджер задач</string>
+    <string name="done_page_label">Выполнено</string>
+    <string name="greetings">Добро пожаловать!</string>
+    <string name="choose_login">Выберите способ входа:</string>
+    <string name="i_am_admin">Я администратор</string>
+    <string name="login_by_link">Войти по ссылке</string>
+</resources>
