@@ -42,6 +42,10 @@ android {
 dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter)
     implementation(libs.androidx.navigation3.ui)
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.lifecycle.viewmodel.navigation3)
