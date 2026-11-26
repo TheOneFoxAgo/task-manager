@@ -10,4 +10,9 @@
     <string name="in_progress_icon_label">В работе</string>
     <string name="teams_icon_label">Команды</string>
     <string name="servers_icon_label">Сервера</string>
+    <string name="link">Ссылка</string>
+    <string name="password">Пароль</string>
+    <string name="login">Войти</string>
+    <string name="back_button">Вернуться</string>
+    <string name="login_by_link_appbar">Вход по ссылке</string>
 </resources>

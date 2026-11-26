@@ -9,4 +9,9 @@
     <string name="in_progress_icon_label">In progress</string>
     <string name="teams_icon_label">Teams</string>
     <string name="servers_icon_label">Servers</string>
+    <string name="link">Link</string>
+    <string name="password">Password</string>
+    <string name="login">Log in</string>
+    <string name="back_button">Go back</string>
+    <string name="login_by_link_appbar">Login by link</string>
 </resources>

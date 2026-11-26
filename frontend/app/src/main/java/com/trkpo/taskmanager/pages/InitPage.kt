@@ -25,7 +25,10 @@ import com.trkpo.taskmanager.R
 import com.trkpo.taskmanager.ui.theme.TaskManagerTheme
 
 @Composable
-fun InitPage() {
+fun InitPage(
+    onAdminLoginClick: () -> Unit = {},
+    onLoginByLinkClick: () -> Unit = {},
+) {
     Scaffold(Modifier.fillMaxSize()) { innerPadding ->
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -45,7 +48,7 @@ fun InitPage() {
                 style = MaterialTheme.typography.headlineLarge,
             )
             FilledTonalButton(
-                onClick = {}
+                onClick = onAdminLoginClick
             ) {
                 Icon(
                     painterResource(R.drawable.ic_stars),
@@ -56,7 +59,7 @@ fun InitPage() {
                 Text(stringResource(R.string.i_am_admin))
             }
             Button(
-                onClick = {}
+                onClick = onLoginByLinkClick
             ) {
                 Icon(
                     painterResource(R.drawable.ic_account_circle),

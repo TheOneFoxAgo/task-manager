@@ -1,5 +1,6 @@
 package com.trkpo.taskmanager
 
+import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -20,7 +21,14 @@ import com.trkpo.taskmanager.PrimaryAppDestinations.SERVERS
 import com.trkpo.taskmanager.PrimaryAppDestinations.TEAMS
 import com.trkpo.taskmanager.pages.InitPage
 import com.trkpo.taskmanager.ui.theme.TaskManagerTheme
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
 
+
+@HiltAndroidApp
+class App: Application() // pleasing hilt
+
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +45,7 @@ class MainActivity : ComponentActivity() {
 fun TaskManagerApp() {
     val backStack = rememberNavBackStack(Init)
     val currentPrimaryDestination = remember { fromDestination(backStack.last()) }
-    val loggedIn = false;
+    val loggedIn = false
     NavigationSuiteScaffold(
         navigationSuiteItems = {
             if (loggedIn) {
