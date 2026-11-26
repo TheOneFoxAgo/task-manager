@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
@@ -20,13 +21,15 @@ import com.trkpo.taskmanager.PrimaryAppDestinations.IN_PROGRESS
 import com.trkpo.taskmanager.PrimaryAppDestinations.SERVERS
 import com.trkpo.taskmanager.PrimaryAppDestinations.TEAMS
 import com.trkpo.taskmanager.pages.InitPage
+import com.trkpo.taskmanager.pages.LoginByLink
 import com.trkpo.taskmanager.ui.theme.TaskManagerTheme
+import com.trkpo.taskmanager.viewmodels.LoginByLinkViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.HiltAndroidApp
 
 
 @HiltAndroidApp
-class App: Application() // pleasing hilt
+class App : Application() // pleasing hilt
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -71,9 +74,21 @@ fun TaskManagerApp() {
     ) {
         NavDisplay(
             backStack = backStack,
-            onBack = {backStack.removeLastOrNull()},
+            onBack = { backStack.removeLastOrNull() },
             entryProvider = entryProvider {
-                entry<Init> { InitPage() }
+                entry<Init> {
+                    InitPage(onLoginByLinkClick = {
+                        backStack.add(LoginByLink)
+                    })
+                }
+                entry<LoginByLink> {
+                    val viewmodel = hiltViewModel<LoginByLinkViewModel>()
+                    LoginByLink(
+                        onSuccessfulLogin = { println("success") },
+                        onBack = { backStack.removeLastOrNull() },
+                        viewmodel
+                    )
+                }
             }
         )
     }
@@ -106,10 +121,11 @@ enum class PrimaryAppDestinations(
         Servers
     );
 }
-fun fromDestination(key: NavKey?) = when(key) {
-        is DoneCategory -> DONE
-        is InProgressCategory -> IN_PROGRESS
-        is TeamsCategory -> TEAMS
-        is ServersCategory -> SERVERS
-        else -> null
+
+fun fromDestination(key: NavKey?) = when (key) {
+    is DoneCategory -> DONE
+    is InProgressCategory -> IN_PROGRESS
+    is TeamsCategory -> TEAMS
+    is ServersCategory -> SERVERS
+    else -> null
 }

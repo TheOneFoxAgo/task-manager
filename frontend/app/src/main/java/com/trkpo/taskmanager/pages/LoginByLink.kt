@@ -7,7 +7,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedIconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -29,13 +32,14 @@ import com.trkpo.taskmanager.viewmodels.UiState
 @Composable
 fun LoginByLink(
     onSuccessfulLogin: () -> Unit = {},
+    onBack: () -> Unit = {},
     viewModel: LoginByLinkViewModel,
 ) {
     val uiState by viewModel.uiState.collectAsState(UiState.Init)
     if (uiState == UiState.Done) {
         onSuccessfulLogin()
     }
-    LoginByLinkRender(uiState) { link, password ->
+    LoginByLinkRender(uiState, onBack) { link, password ->
         viewModel.login(link, password)
     }
 }
@@ -43,16 +47,20 @@ fun LoginByLink(
 @Composable
 fun LoginByLinkRender(
     uiState: UiState,
+    onBack: () -> Unit = {},
     onLogin: (String, String) -> Unit = { _, _ -> }
 ) {
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
                 navigationIcon = {
-                    Icon(
-                        painterResource(R.drawable.ic_back),
-                        contentDescription = stringResource(R.string.back_button)
-                    )
+                    IconButton(onClick = onBack) {
+                        Icon(
+                            painterResource(R.drawable.ic_back),
+                            contentDescription = stringResource(R.string.back_button)
+                        )
+                    }
+
                 },
                 title = {
                     Text(
